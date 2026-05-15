@@ -1,0 +1,170 @@
+{
+  "proiect": {
+    "nume": "Gardul de la țară",
+    "subtitlu": "315 m de plasă bordurată, 3 laturi, 15 porți batante",
+    "data_start": "2026-05-13",
+    "data_target": "2026-09-30"
+  },
+  "deviz": {
+    "categorii": [
+      {
+        "nume": "Etapa 2 — Stâlpi colț",
+        "achizitionat": false,
+        "items": [
+          {"denumire": "Stâlpi metalici 60×40, 2.4m (colț)", "cantitate": 6, "unitate": "buc", "pret_unitar": 95, "total": 570},
+          {"denumire": "Ciment 25kg", "cantitate": 10, "unitate": "saci", "pret_unitar": 25, "total": 250},
+          {"denumire": "Nisip + pietriș", "cantitate": 0.5, "unitate": "m³", "pret_unitar": 150, "total": 75},
+          {"denumire": "Sfoară 200m + țăruși", "cantitate": 1, "unitate": "set", "pret_unitar": 80, "total": 80}
+        ]
+      },
+      {
+        "nume": "Etapa 3 — Stâlpi intermediari (transa 1)",
+        "achizitionat": false,
+        "items": [
+          {"denumire": "Stâlpi metalici 60×40, 2.4m", "cantitate": 62, "unitate": "buc", "pret_unitar": 85, "total": 5270},
+          {"denumire": "Ciment 25kg", "cantitate": 65, "unitate": "saci", "pret_unitar": 25, "total": 1625},
+          {"denumire": "Nisip + pietriș", "cantitate": 2, "unitate": "m³", "pret_unitar": 150, "total": 300}
+        ]
+      },
+      {
+        "nume": "Etapa 3 — Stâlpi intermediari (transa 2)",
+        "achizitionat": false,
+        "items": [
+          {"denumire": "Stâlpi metalici 60×40, 2.4m", "cantitate": 62, "unitate": "buc", "pret_unitar": 85, "total": 5270},
+          {"denumire": "Ciment 25kg", "cantitate": 65, "unitate": "saci", "pret_unitar": 25, "total": 1625},
+          {"denumire": "Nisip + pietriș", "cantitate": 2.5, "unitate": "m³", "pret_unitar": 150, "total": 375}
+        ]
+      },
+      {
+        "nume": "Etapa 4 — Panouri și finisaje",
+        "achizitionat": false,
+        "items": [
+          {"denumire": "Panouri bordurate 2.5×1.8m (margine întoarsă)", "cantitate": 126, "unitate": "buc", "pret_unitar": 190, "total": 23940},
+          {"denumire": "Cleme prindere panou-stâlp (doar pt panouri fixe)", "cantitate": 111, "unitate": "seturi", "pret_unitar": 12, "total": 1332},
+          {"denumire": "Capace PVC stâlpi", "cantitate": 130, "unitate": "buc", "pret_unitar": 3, "total": 390},
+          {"denumire": "Profil U protecție (opțional)", "cantitate": 315, "unitate": "ml", "pret_unitar": 7, "total": 2205}
+        ]
+      },
+      {
+        "nume": "Etapa 5 — Porți batante (15 buc pe latura vecinului)",
+        "achizitionat": false,
+        "items": [
+          {"denumire": "Balamale grele de poartă (set 2 buc cu pin)", "cantitate": 15, "unitate": "seturi", "pret_unitar": 60, "total": 900},
+          {"denumire": "Zăvor cu mâner pentru poartă", "cantitate": 15, "unitate": "buc", "pret_unitar": 40, "total": 600},
+          {"denumire": "Platbandă metalică 40×4mm × 1.8m (rigidizare)", "cantitate": 15, "unitate": "buc", "pret_unitar": 25, "total": 375},
+          {"denumire": "Bride M10 (4/poartă pt fixare fără sudură)", "cantitate": 60, "unitate": "buc", "pret_unitar": 4, "total": 240},
+          {"denumire": "Șuruburi, dibluri, șaibe (lot)", "cantitate": 1, "unitate": "lot", "pret_unitar": 50, "total": 50},
+          {"denumire": "Ciment extra (stâlpi sapi la 1m)", "cantitate": 15, "unitate": "saci", "pret_unitar": 25, "total": 375},
+          {"denumire": "Aparat de sudat invertor 160A (opțional)", "cantitate": 1, "unitate": "buc", "pret_unitar": 500, "total": 500}
+        ]
+      }
+    ]
+  },
+  "etape": [
+    {
+      "id": 1,
+      "nume": "Pregătire și trasare",
+      "descriere": "Măsurători exacte pe teren, marcaj cu țăruși, comandă materiale",
+      "status": "in_curs",
+      "weekenduri_estimate": 2,
+      "taskuri": [
+        {"id": "1.1", "text": "Verifici limita exactă cu vecinii (extras CF / cadastru)", "facut": false},
+        {"id": "1.2", "text": "Vorbești cu vecinul de pe latura lungă despre cele 15 porți", "facut": false},
+        {"id": "1.3", "text": "Măsori cele 3 laturi cu ruletă și sfoară lungă", "facut": false},
+        {"id": "1.4", "text": "Marchezi cele 4 colțuri cu țăruși mari", "facut": false},
+        {"id": "1.5", "text": "Marchezi pozițiile celor 15 porți pe latura vecinului (din 10 în 10m)", "facut": false},
+        {"id": "1.6", "text": "Calculezi exact câte panouri/stâlpi pe fiecare latură", "facut": false},
+        {"id": "1.7", "text": "Suni 2-3 furnizori, ceri ofertă pentru tot", "facut": false},
+        {"id": "1.8", "text": "Întrebi specific de panouri cu margine întoarsă (round top)", "facut": false},
+        {"id": "1.9", "text": "Decizi: cumperi aparat de sudat sau folosești bride", "facut": false},
+        {"id": "1.10", "text": "Comanzi primul lot (Etapa 2)", "facut": false}
+      ]
+    },
+    {
+      "id": 2,
+      "nume": "Stâlpi de colț",
+      "descriere": "4 colțuri + 2 capete latură scurtă, sapă mai adânc (1m)",
+      "status": "neinceput",
+      "weekenduri_estimate": 1,
+      "taskuri": [
+        {"id": "2.1", "text": "Întinzi sfoară între toți cei 4 țăruși-colț", "facut": false},
+        {"id": "2.2", "text": "Sapi 4 gropi colț: 30cm × 100cm adâncime", "facut": false},
+        {"id": "2.3", "text": "Bagi stâlpii, verifici polobocul pe 2 axe", "facut": false},
+        {"id": "2.4", "text": "Sprijini cu 2-3 pari oblici (să nu se miște)", "facut": false},
+        {"id": "2.5", "text": "Prepari beton 1:2:3 și torni", "facut": false},
+        {"id": "2.6", "text": "Lași 48h să prindă betonul înainte să atingi", "facut": false}
+      ]
+    },
+    {
+      "id": 3,
+      "nume": "Stâlpi intermediari",
+      "descriere": "~124 stâlpi pe 3 laturi. Pe latura vecinului, stâlpii adiacenți porților se sapă la 1m.",
+      "status": "neinceput",
+      "weekenduri_estimate": 4,
+      "taskuri": [
+        {"id": "3.1", "text": "Latura lungă 1 (cu vecinul): marcaj porți + stâlpi", "facut": false},
+        {"id": "3.2", "text": "Latura lungă 1: sapă stâlpi normali (80cm) + stâlpi-poartă (1m)", "facut": false},
+        {"id": "3.3", "text": "Latura lungă 1: turnare beton și uscare", "facut": false},
+        {"id": "3.4", "text": "Latura scurtă: marcaj + sapă + montaj", "facut": false},
+        {"id": "3.5", "text": "Latura scurtă: turnare beton și uscare", "facut": false},
+        {"id": "3.6", "text": "Latura lungă 2: marcaj + sapă + montaj", "facut": false},
+        {"id": "3.7", "text": "Latura lungă 2: turnare beton și uscare", "facut": false}
+      ]
+    },
+    {
+      "id": 4,
+      "nume": "Montaj panouri fixe",
+      "descriere": "111 panouri fixe cu cleme. Lăsăm pozițiile porților goale momentan.",
+      "status": "neinceput",
+      "weekenduri_estimate": 2,
+      "taskuri": [
+        {"id": "4.1", "text": "Verifici că toți stâlpii sunt zile bune prinși (min 1 săpt)", "facut": false},
+        {"id": "4.2", "text": "Montezi panourile fixe pe latura lungă 1 (sărind peste porți)", "facut": false},
+        {"id": "4.3", "text": "Montezi panourile pe latura scurtă", "facut": false},
+        {"id": "4.4", "text": "Montezi panourile pe latura lungă 2", "facut": false},
+        {"id": "4.5", "text": "Pui capacele PVC pe stâlpi", "facut": false},
+        {"id": "4.6", "text": "Aplici profil U sau verifici protecția pentru pisici", "facut": false}
+      ]
+    },
+    {
+      "id": 5,
+      "nume": "Porți batante (15 buc)",
+      "descriere": "Convertim 15 panouri în porți cu balamale și zăvor, alternativ pe direcție.",
+      "status": "neinceput",
+      "weekenduri_estimate": 2,
+      "taskuri": [
+        {"id": "5.1", "text": "Sudezi/prinzi platbanda 40×4 verticală pe latura cu balamale a fiecărui panou", "facut": false},
+        {"id": "5.2", "text": "Stabilești direcția alternativă cu vecinul (1 stânga, 1 dreapta, etc.)", "facut": false},
+        {"id": "5.3", "text": "Sudezi/prinzi balamale pe panou (sus + jos), aliniate vertical", "facut": false},
+        {"id": "5.4", "text": "Montezi cealaltă jumătate a balamalelor pe stâlpii corespunzători", "facut": false},
+        {"id": "5.5", "text": "Atârni primul panou-poartă, verifici că se închide drept", "facut": false},
+        {"id": "5.6", "text": "Montezi zăvorul + urechea pe stâlpul opus", "facut": false},
+        {"id": "5.7", "text": "Repeți pentru toate cele 15 porți", "facut": false},
+        {"id": "5.8", "text": "Ungi balamalele cu vaselină, testezi toate", "facut": false},
+        {"id": "5.9", "text": "Bere cu mama și vecinul, admirat gardul cu poartă mobilă pentru Misha", "facut": false}
+      ]
+    }
+  ],
+  "jurnal": [
+    {
+      "data": "2026-05-13",
+      "titlu": "Început proiect",
+      "text": "Am identificat terenul pe Google Maps și am măsurat perimetrul: 287.77m. Cele 3 laturi de făcut (excludem latura cu poarta) sunt aproximativ 315m. Următorul pas: măsurători exacte cu ruletă pe teren.",
+      "poze": []
+    },
+    {
+      "data": "2026-05-13",
+      "titlu": "Plan adăugat: 15 porți batante pe latura vecinului",
+      "text": "Rândurile de viță sunt perpendiculare pe gardul lung. Pentru întoarcerea motosapei la capătul fiecărui rând, adăugăm 15 porți batante (din 10 în 10m). Folosim panouri bordurate normale cu balamale și zăvor, rigidizate cu platbandă verticală. La anul probabil schimb via pe araci, dar porțile rămân utile oricum. Etapa 5 nouă, adăugată în plan.",
+      "poze": []
+    }
+  ],
+  "furnizori": [
+    {"nume": "Dedeman", "tip": "Lanț mare", "telefon": "—", "note": "Verifică oferta online la 'panouri bordurate' și 'balamale poartă'"},
+    {"nume": "Praktiker", "tip": "Lanț mare", "telefon": "—", "note": "Concurent Dedeman"},
+    {"nume": "Leroy Merlin", "tip": "Lanț mare", "telefon": "—", "note": "Concurent Dedeman, bun pentru scule (aparat sudat)"},
+    {"nume": "Furnizor local 1", "tip": "Local", "telefon": "—", "note": "Caută în zona ta — de obicei mai ieftin"},
+    {"nume": "Furnizor local 2", "tip": "Local", "telefon": "—", "note": "—"},
+    {"nume": "Fierărie locală", "tip": "Local", "telefon": "—", "note": "Pentru platbandă tăiată la lungime + găurit + eventual sudură"}
+  ]
+}

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jurnal — Gard la țară</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div id="header"></div>
+
+    <h1>Jurnal de <span class="accent">șantier</span></h1>
+    <p class="subtitle">Ce am făcut, ce mai am de făcut, ce am învățat pe parcurs.</p>
+
+    <div class="info-banner">
+      <strong>Cum adaugi o intrare:</strong> editează <code>data.json</code> și adaugă un obiect nou în array-ul <code>jurnal</code>. Pozele le pui în folderul <code>images/</code> și referiți-le ca <code>"images/poza1.jpg"</code>.
+    </div>
+
+    <div id="jurnal"></div>
+
+    <div id="footer"></div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    (async () => {
+      document.getElementById('header').innerHTML = headerHTML('jurnal');
+      document.getElementById('footer').innerHTML = footerHTML();
+
+      try {
+        const data = await loadData();
+        const intrari = [...data.jurnal].reverse();
+
+        if (intrari.length === 0) {
+          document.getElementById('jurnal').innerHTML =
+            '<div class="empty-state">Niciun jurnal încă.</div>';
+          return;
+        }
+
+        document.getElementById('jurnal').innerHTML = intrari.map(e => `
+          <div class="jurnal-entry">
+            <div class="jurnal-date">${formatDate(e.data)}</div>
+            <div class="jurnal-title">${e.titlu}</div>
+            <div class="jurnal-text">${e.text}</div>
+            ${e.poze && e.poze.length ? `
+              <div class="poze-grid">
+                ${e.poze.map(p => `
+                  <div class="poza"><img src="${p}" alt=""></div>
+                `).join('')}
+              </div>
+            ` : ''}
+          </div>
+        `).join('');
+      } catch (err) {
+        document.querySelector('.container').innerHTML += `
+          <div class="info-banner">Nu am putut încărca datele: ${err.message}</div>
+        `;
+      }
+    })();
+  </script>
+</body>
+</html>

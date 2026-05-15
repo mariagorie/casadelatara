@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Task-uri — Gard la țară</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div id="header"></div>
+
+    <h1>Lista de <span class="accent">treburi</span></h1>
+    <p class="subtitle">Bifează pe loc, sincronizează când commit-uiești în GitHub.</p>
+
+    <div class="info-banner">
+      <strong>Cum funcționează:</strong> Bifările sunt salvate local pe device-ul curent. Pentru sincronizare între telefon și laptop, editează <code>data.json</code> direct în GitHub și schimbă <code>"facut": false</code> în <code>"facut": true</code>.
+    </div>
+
+    <div id="etape"></div>
+
+    <div id="footer"></div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    const LS_KEY = 'gard-tara-taskuri';
+
+    function getLocalState() {
+      try {
+        return JSON.parse(localStorage.getItem(LS_KEY) || '{}');
+      } catch { return {}; }
+    }
+
+    function setLocalState(state) {
+      localStorage.setItem(LS_KEY, JSON.stringify(state));
+    }
+
+    function toggleTask(id, checkbox) {
+      const state = getLocalState();
+      state[id] = checkbox.checked;
+      setLocalState(state);
+      const taskEl = checkbox.closest('.task');
+      taskEl.classList.toggle('done', checkbox.checked);
+    }
+
+    (async () => {
+      document.getElementById('header').innerHTML = headerHTML('taskuri');
+      document.getElementById('footer').innerHTML = footerHTML();
+
+      try {
+        const data = await loadData();
+        const localState = getLocalState();
+
+        document.getElementById('etape').innerHTML = data.etape.map(et => `
+          <div class="etapa">
+            <div class="etapa-header">
+              <div>
+                <div class="etapa-title">Etapa ${et.id} — ${et.nume}</div>
+                <div class="etapa-desc">${et.descriere}</div>
+              </div>
+              ${statusBadge(et.status)}
+            </div>
+            <div style="margin-top: 0.75rem;">
+              ${et.taskuri.map(t => {
+                const isChecked = t.facut || localState[t.id] === true;
+                return `
+                  <label class="task ${isChecked ? 'done' : ''}">
+                    <input type="checkbox" ${isChecked ? 'checked' : ''}
+                      onchange="toggleTask('${t.id}', this)">
+                    <span class="task-id">${t.id}</span>
+                    <span class="task-text">${t.text}</span>
+                  </label>
+                `;
+              }).join('')}
+            </div>
+          </div>
+        `).join('');
+      } catch (err) {
+        document.querySelector('.container').innerHTML += `
+          <div class="info-banner">Nu am putut încărca datele: ${err.message}</div>
+        `;
+      }
+    })();
+  </script>
+</body>
+</html>

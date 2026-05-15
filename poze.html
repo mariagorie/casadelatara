@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poze — Gard la țară</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div id="header"></div>
+
+    <h1>Poze de pe <span class="accent">șantier</span></h1>
+    <p class="subtitle">Toate pozele din jurnal, într-un singur loc.</p>
+
+    <div class="info-banner">
+      <strong>Cum adaugi poze:</strong> pune fișierele în folderul <code>images/</code> din repo (drag & drop direct pe GitHub din browser), apoi adaugă calea în array-ul <code>poze</code> al intrării de jurnal.
+    </div>
+
+    <div id="galerie"></div>
+
+    <div id="footer"></div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    (async () => {
+      document.getElementById('header').innerHTML = headerHTML('poze');
+      document.getElementById('footer').innerHTML = footerHTML();
+
+      try {
+        const data = await loadData();
+        const toatePozele = [];
+        for (const e of data.jurnal) {
+          if (e.poze && e.poze.length) {
+            for (const p of e.poze) {
+              toatePozele.push({ url: p, data: e.data, titlu: e.titlu });
+            }
+          }
+        }
+
+        if (toatePozele.length === 0) {
+          document.getElementById('galerie').innerHTML =
+            '<div class="empty-state">Nicio poză încă. Mai mult ciment, mai puține poze… deocamdată.</div>';
+          return;
+        }
+
+        document.getElementById('galerie').innerHTML = `
+          <div class="poze-grid" style="grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));">
+            ${toatePozele.map(p => `
+              <div>
+                <div class="poza"><img src="${p.url}" alt="${p.titlu}"></div>
+                <div style="font-size: 0.8rem; color: var(--text-soft); margin-top: 0.35rem; font-style: italic;">
+                  ${formatDate(p.data)} — ${p.titlu}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      } catch (err) {
+        document.querySelector('.container').innerHTML += `
+          <div class="info-banner">Nu am putut încărca datele: ${err.message}</div>
+        `;
+      }
+    })();
+  </script>
+</body>
+</html>

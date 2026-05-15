@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Furnizori — Gard la țară</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div id="header"></div>
+
+    <h1>Lista de <span class="accent">furnizori</span></h1>
+    <p class="subtitle">Cine vinde ce, la ce preț, cu ce condiții.</p>
+
+    <div class="info-banner">
+      <strong>Întrebări de pus când suni:</strong>
+      <ul style="margin: 0.5rem 0 0 1.5rem;">
+        <li>Preț pentru panou bordurat 2.5×1.8m, antracit/verde, cu margine întoarsă (round top)</li>
+        <li>Preț per stâlp metalic 60×40, 2.4m, vopsit antracit</li>
+        <li>Au cleme de prindere și capace în stoc?</li>
+        <li>Costul livrării la cantitate (315ml)</li>
+        <li>Discount la plată cash?</li>
+      </ul>
+    </div>
+
+    <div id="furnizori"></div>
+
+    <div id="footer"></div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    (async () => {
+      document.getElementById('header').innerHTML = headerHTML('furnizori');
+      document.getElementById('footer').innerHTML = footerHTML();
+
+      try {
+        const data = await loadData();
+        document.getElementById('furnizori').innerHTML = data.furnizori.map(f => `
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem;">
+              <div>
+                <h3 style="margin-bottom: 0.25rem;">${f.nume}</h3>
+                <div style="font-size: 0.85rem; color: var(--text-soft); font-style: italic;">${f.tip}</div>
+              </div>
+              <span class="badge badge-soft">${f.telefon}</span>
+            </div>
+            <p style="margin-top: 0.75rem; color: var(--text-muted); font-size: 0.9rem;">${f.note}</p>
+          </div>
+        `).join('');
+      } catch (err) {
+        document.querySelector('.container').innerHTML += `
+          <div class="info-banner">Nu am putut încărca datele: ${err.message}</div>
+        `;
+      }
+    })();
+  </script>
+</body>
+</html>

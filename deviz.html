@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Deviz — Gard la țară</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <div id="header"></div>
+
+    <h1>Deviz <span class="accent">pe etape</span></h1>
+    <p class="subtitle">Cumperi când ești gata pentru etapa următoare. Nu mai înainte.</p>
+
+    <div id="total-card" class="card"></div>
+
+    <div id="categorii"></div>
+
+    <div id="footer"></div>
+  </div>
+
+  <script src="script.js"></script>
+  <script>
+    (async () => {
+      document.getElementById('header').innerHTML = headerHTML('deviz');
+      document.getElementById('footer').innerHTML = footerHTML();
+
+      try {
+        const data = await loadData();
+        const total = totalDeviz(data.deviz);
+        const achizitionat = data.deviz.categorii
+          .filter(c => c.achizitionat)
+          .reduce((s, c) => s + c.items.reduce((ss, i) => ss + i.total, 0), 0);
+        const ramas = total - achizitionat;
+
+        document.getElementById('total-card').innerHTML = `
+          <h3>Buget total proiect</h3>
+          <div class="stats" style="margin: 0.75rem 0 0;">
+            <div class="stat">
+              <div class="stat-label">Total estimat</div>
+              <div class="stat-value">${formatLei(total)}</div>
+            </div>
+            <div class="stat">
+              <div class="stat-label">Cheltuit</div>
+              <div class="stat-value">${formatLei(achizitionat)}</div>
+            </div>
+            <div class="stat">
+              <div class="stat-label">De cheltuit</div>
+              <div class="stat-value">${formatLei(ramas)}</div>
+            </div>
+          </div>
+        `;
+
+        document.getElementById('categorii').innerHTML = data.deviz.categorii.map(cat => {
+          const subtotal = cat.items.reduce((s, i) => s + i.total, 0);
+          const badge = cat.achizitionat
+            ? '<span class="badge badge-green">Cumpărat</span>'
+            : '<span class="badge badge-soft">De cumpărat</span>';
+          return `
+            <h2 style="display: flex; align-items: center; gap: 0.75rem;">
+              ${cat.nume} ${badge}
+            </h2>
+            <table>
+              <thead>
+                <tr>
+                  <th>Material</th>
+                  <th class="num">Cant.</th>
+                  <th>UM</th>
+                  <th class="num">Preț</th>
+                  <th class="num">Total</th>
+                </tr>
+              </thead>
+              <tbody>
+                ${cat.items.map(item => `
+                  <tr>
+                    <td>${item.denumire}</td>
+                    <td class="num">${item.cantitate}</td>
+                    <td>${item.unitate}</td>
+                    <td class="num">${formatLei(item.pret_unitar)}</td>
+                    <td class="num">${formatLei(item.total)}</td>
+                  </tr>
+                `).join('')}
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="4">Subtotal</td>
+                  <td class="num">${formatLei(subtotal)}</td>
+                </tr>
+              </tfoot>
+            </table>
+          `;
+        }).join('');
+      } catch (err) {
+        document.querySelector('.container').innerHTML += `
+          <div class="info-banner">Nu am putut încărca datele: ${err.message}</div>
+        `;
+      }
+    })();
+  </script>
+</body>
+</html>
